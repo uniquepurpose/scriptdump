@@ -17,3 +17,6 @@ Extracts the following information via SNMP from Ubiquiti AirGrids and NanoStati
 # grafana_geigercounter.sh
 Reads CPM and uSievert values from MIghtyohm Geigercounter. Depends on grafana_geigercounter_readserial.py.
 Needs python and python-serial packages installed.
+
+# grafana_apc.sh
+Reads data with apcaccess and sends it to InfluxDB.
