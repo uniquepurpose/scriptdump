@@ -13,3 +13,6 @@ Extracts the following information via SNMP from Ubiquiti AirGrids and NanoStati
 - Noise floor
 - TX rate
 - RX rate
+
+# grafana_geigercounter.sh
+Reads CPM and uSievert values from MIghtyohm Geigercounter. Depends on grafana_geigercounter_readserial.py
