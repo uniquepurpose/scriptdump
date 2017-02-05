@@ -1,0 +1,104 @@
+#include "DHT.h"
+#include "WiFi.h"
+
+const char * networkName = "wlan ssid";
+const char * networkPswd = "wlan psk";
+// Internet domain to request from:
+const char * hostDomain = "webserver";
+const int hostPort = 80;
+
+//const float * t = 0;
+
+#define DHTPIN 27     // what digital pin we're connected to
+#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
+
+// Initialize DHT sensor.
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println("DHTxx test!");
+  connectToWiFi(networkName, networkPswd);
+  
+  dht.begin();
+}
+
+void loop() {
+  // Wait a few seconds between measurements.
+  delay(2000);
+
+  // Reading temperature or humidity takes about 250 milliseconds!
+  // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
+  float h = dht.readHumidity();
+  // Read temperature as Celsius (the default)
+  float t = dht.readTemperature();
+  Serial.println("Temp:" + String(t) + ", Humid: " + String(h));
+  
+  
+  //requestURL(hostDomain, hostPort, t); // Connect to server
+  WiFiClient client;
+  if (!client.connect(hostDomain, hostPort))
+  {
+    Serial.println("connection failed");
+    return;
+  }
+  Serial.println("Connected!");
+  printLine();
+
+  // This will send the request to the server
+  client.print((String)"GET /object=serverschrank&temp=" + float(t) + "&humid=" + float(h) + " HTTP/1.1\r\n" +
+               "Host: " + String(hostDomain) + "\r\n" +
+               "Connection: close\r\n\r\n");
+  unsigned long timeout = millis();
+  while (client.available() == 0) 
+  {
+    if (millis() - timeout > 5000) 
+    {
+      Serial.println(">>> Client Timeout !");
+      client.stop();
+      return;
+    }
+  }
+  client.stop();
+
+  
+  Serial.println("Jetzt schlaf ich");
+  esp_deep_sleep(5000000);
+}
+
+
+void connectToWiFi(const char * ssid, const char * pwd)
+{
+
+  printLine();
+  Serial.println("Connecting to WiFi network: " + String(ssid));
+
+  WiFi.begin(ssid, pwd);
+
+  while (WiFi.status() != WL_CONNECTED) 
+  {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println();
+  Serial.println("WiFi connected!");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
+void requestURL(const char * host, uint8_t port, char t)
+{
+  printLine();
+  Serial.println("Connecting to domain: " + String(host));
+
+  // Use WiFiClient class to create TCP connections
+}
+
+void printLine()
+{
+  Serial.println();
+  for (int i=0; i<30; i++)
+    Serial.print("-");
+  Serial.println();
+}
