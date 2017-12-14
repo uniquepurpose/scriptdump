@@ -15,7 +15,7 @@ Extracts the following information via SNMP from Ubiquiti AirGrids and NanoStati
 - RX rate
 
 # grafana_geigercounter.sh & grafana_geigercounter_readserial.py
-Reads CPM and uSievert values from Mightyohm Geigercounter. Depends on grafana_geigercounter_readserial.py.
+Reads CPM and uSievert values from <a href="http://mightyohm.com/blog/products/geiger-counter/">Mightyohm Geigercounter</a>. Depends on grafana_geigercounter_readserial.py.
 Needs python and python-serial packages installed.
 
 # grafana_apc.sh
