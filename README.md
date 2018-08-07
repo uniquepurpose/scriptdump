@@ -29,3 +29,6 @@ Arduino sketch for Sparkfun ESP32 Thing and an AM2302 temperature&humidity senso
 
 ## run-update.sh
 Simple shortcut I use to update my debian-based machines (debian, ubuntu, raspbian). Don't forget: chmod +x run-update.sh
+
+## run-supportscript.sh
+Script to download newest NXT support script, execute it and rename output file to include date and hostname.
