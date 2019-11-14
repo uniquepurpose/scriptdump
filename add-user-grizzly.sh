@@ -1,4 +1,5 @@
-!/bin/bash 
+#!/bin/bash 
+
 # Create user
 sudo useradd -d /home/grizzly -m -s /bin/bash -c grizzly grizzly
 
