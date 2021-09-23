@@ -12,6 +12,3 @@ sudo chown -R grizzly:grizzly /home/grizzly/.ssh
 # Add grizzly to sudoers
 echo "grizzly ALL=NOPASSWD:ALL" | sudo tee /etc/sudoers.d/grizzly
 sudo chmod 440 /etc/sudoers.d/grizzly
-
-# Set password for grizzly
-sudo passwd grizzly
