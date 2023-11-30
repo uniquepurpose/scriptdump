@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # Read data from serial output of Mightyohm Geigercounter (http://mightyohm.com/blog/products/geiger-counter/)
+# Requires python3 and pyserial. -> sudo pip3 install pyserial
 import time
 import serial
 
@@ -14,5 +15,5 @@ geigercounter = serial.Serial(
 counter=0
 
 #while 1:
-output=geigercounter.readline()
-print output
+output=geigercounter.readline().decode("utf-8").rstrip()
+print(output)
