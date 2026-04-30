@@ -5,7 +5,7 @@ sudo useradd -d /home/grizzly -m -s /bin/bash -c grizzly grizzly
 
 # Add SSH keys
 sudo mkdir /home/grizzly/.ssh
-sudo apt-get -y install curl
+sudo apt-get -y install curl sudo
 sudo curl https://github.com/uniquepurpose.keys -o /home/grizzly/.ssh/authorized_keys
 sudo chmod -R 700 /home/grizzly/.ssh
 sudo chown -R grizzly:grizzly /home/grizzly/.ssh
